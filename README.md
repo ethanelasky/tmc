@@ -1,4 +1,4 @@
-# L&S 88 - Final Project [Sample] - Tracking US
+# Data H195 Honors Thesis - US-Taiwan Media Comparison
 
 _Ethan Elasky_
 
