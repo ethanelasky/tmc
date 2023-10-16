@@ -2,7 +2,7 @@
 
 _Ethan Elasky_
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://github.com/ethanelasky)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ethanelasky/ustmc/HEAD)
 
 This project for my Data Science honors thesis course aims to compare Taiwanese and American media coverage of Chinese activities in the Taiwan Strait using natural language processing techniques. This is informative in explaining how the Taiwanese and American publics differ in their attitudes about the threat posed to the island by the mainland's Communist regime. For more detailed information, see my [Pre-Analysis Plan](notebooks/pre-analysis-plan.md).
 
