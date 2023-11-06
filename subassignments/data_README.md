@@ -1,8 +1,11 @@
 # Data Source Documentation Assignment
 ## Prompt
 Identify data source for your research project, and document aspects of this data source. 
-Data provenance, and explanation of how the data was or will be gathered should be documented.  
+
+Data provenance, and explanation of how the data was or will be gathered should be documented.
+  
 Ownership of the data, including licensing issues for dataset and possible outputs should be discussed. 
+
 Possibilities for bias or censoring in the data should be explored.
 ## Response
 ### Data source and provenance
