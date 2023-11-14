@@ -1,0 +1,157 @@
+{
+  "main": {
+    "id": "ebb46aeffa1ca5e0",
+    "type": "split",
+    "children": [
+      {
+        "id": "1ace8e0212a5bd93",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "22199e669a55e094",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5a36a80a5d709c32",
+    "type": "split",
+    "children": [
+      {
+        "id": "948d2a8bc78d8496",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fb88aecd18d518b6",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "63d63f607a6354fd",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "3e905c0576b06309",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "2dbe4f69060efe2f",
+    "type": "split",
+    "children": [
+      {
+        "id": "e4a64b337ce22170",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bd268fb1897b9284",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "e711993b0acd6530",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "0b10394e749a0a26",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "b0613bd56f187af4",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "fb88aecd18d518b6",
+  "lastOpenFiles": [
+    "scrapers/udn_scraper/udn_sitemap_root_scraper.py",
+    "scrapers/udn_scraper/udn_sitemap_leaves_scraper.py",
+    "scrapers/udn_scraper/udn_links_to_sitemaps.txt",
+    "scrapers/udn_scraper/udn_article_links.txt",
+    "scrapers/udn_scraper",
+    "scrapers/udn_link_scraper/udn_article_links.txt",
+    "scrapers/udn_link_scraper/udn_sitemap_leaves_scraper.py",
+    "scrapers/udn_link_scraper/udn_sitemap_root_scraper.py",
+    "scrapers/udn_link_scraper/udn_links_to_sitemaps.txt",
+    "scrapers/udn_link_scraper/udn_link_scraper.py",
+    "scrapers/udn_link_scraper/ct_link_scraper.py",
+    "vault/Data collection tools.md",
+    "scrapers/scraping_README.md"
+  ]
+}
