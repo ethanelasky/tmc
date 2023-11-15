@@ -16,8 +16,8 @@ class LtnSpiderSpider(scrapy.Spider):
             for n in range(int((end_date - start_date).days)):
                 yield [start_date + timedelta(n),start_date + timedelta(n+1)]
 
-        start_date = date(2013, 1, 1)
-        end_date = date(2013, 12, 31) ## Change to corpus end date later
+        start_date = date(2016, 1, 1)
+        end_date = date(2023, 7, 1) ## Change to corpus end date later
         dates = []
         for days in daterange(start_date, end_date):
             dates.append([days[0].strftime("%Y%m%d"), days[1].strftime("%Y%m%d")])
