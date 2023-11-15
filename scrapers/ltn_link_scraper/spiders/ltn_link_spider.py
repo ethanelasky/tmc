@@ -9,7 +9,7 @@ class LtnSpiderSpider(scrapy.Spider):
     """
     On the LTN website, start_time is inclusive, while end_time is exclusive."""
 
-    name = "ltn_spider"
+    name = "ltn_link_spider"
     allowed_domains = ["ltn.com.tw"]
     def start_requests(self):
         def daterange(start_date, end_date):
