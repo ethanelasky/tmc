@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "1ace8e0212a5bd93",
+        "id": "22744d19dfa92d92",
         "type": "tabs",
         "children": [
           {
-            "id": "22199e669a55e094",
+            "id": "d13731003b396695",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "scrapers/scraping_README.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "scrapers/scraping_README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "scrapers/scraping_README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "scrapers/scraping_README.md"
+              }
             }
           }
         ]
@@ -138,20 +146,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fb88aecd18d518b6",
+  "active": "d13731003b396695",
   "lastOpenFiles": [
-    "scrapers/udn_scraper/udn_sitemap_root_scraper.py",
-    "scrapers/udn_scraper/udn_sitemap_leaves_scraper.py",
-    "scrapers/udn_scraper/udn_links_to_sitemaps.txt",
-    "scrapers/udn_scraper/udn_article_links.txt",
-    "scrapers/udn_scraper",
-    "scrapers/udn_link_scraper/udn_article_links.txt",
-    "scrapers/udn_link_scraper/udn_sitemap_leaves_scraper.py",
-    "scrapers/udn_link_scraper/udn_sitemap_root_scraper.py",
-    "scrapers/udn_link_scraper/udn_links_to_sitemaps.txt",
-    "scrapers/udn_link_scraper/udn_link_scraper.py",
-    "scrapers/udn_link_scraper/ct_link_scraper.py",
-    "vault/Data collection tools.md",
-    "scrapers/scraping_README.md"
+    "scrapers/ltn_article_scraper/ltn_2013_links.csv",
+    "scrapers/ltn_article_scraper/ltn_2013_links.json",
+    "scrapers/ltn_article_scraper/ltn_article_scraper.py",
+    "scrapers/ltn_article_scraper/ltn_sample_article_entry.csv",
+    "[.md",
+    "scrapers/scraping_README.md",
+    "scrapers/ltn_link_scraper/ltn_2013_links.json",
+    "scrapers/ltn_link_scraper/2013_links.json",
+    "scrapers/ltn_link_scraper/sample_ltn_article_links.json",
+    "scrapers/ltn_link_scraper/ltn_articles.json",
+    "sample_article_entry.csv.md",
+    "scrapers/ltn_article_scraper/ltn_leaf_scraper.py",
+    "scrapers/ltn_article_scraper/sample_article_entry.csv",
+    "scrapers/ltn_article_scraper",
+    "vault/Data collection tools.md"
   ]
 }
