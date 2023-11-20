@@ -34,22 +34,43 @@ async def scrape_text_from_page(urls, delay=5.0):
 
     assert len(sys.argv) == 3
 
-    df = pd.DataFrame(columns=['link', 'title', 'section1',
-                                    'section2', 'time', 'article text'])
+    df = pd.DataFrame(columns=['link', 'title', 'sections', 'time', 'article text'])
+
+    path_to_extension = "./uBlock"
+    user_data_dir = "/tmp/test-user-data-dir"
 
     async with async_playwright() as p:
-        browser = await p.chromium.launch(headless=False)
+        browser = await p.chromium.launch_persistent_context(
+        user_data_dir,
+        headless=False,
+        args=[
+            f"--disable-extensions-except={path_to_extension}",
+            f"--load-extension={path_to_extension}",
+        ],
+        )
+
         page = await browser.new_page()
+        page.set_default_navigation_timeout(60000)
 
         for i in range(len(urls)):
             url = urls[i]
-            await page.goto(url)
+            print(url)
+            while True:
+                try:
+                    await page.goto(url)      
+                except:
+                    await asyncio.sleep(delay)
+                    continue
+                break
 
             sections = await page.locator('css=div.breadcrumbs.boxTitle.boxText > a').all_inner_texts()
 
-            title = await page.locator('css=h1').inner_text()
+            h1s = await page.locator('css=h1').all_inner_texts()
+            h1 = next(filter(None, h1s))
 
-            time = await page.locator('css=span.time').inner_text()
+            times = await page.locator('css=.time').all_inner_texts()
+            time = next(filter(None, times))
+
 
             paragraphs = await page.locator("css=div.text.boxTitle.boxText > "
                                       + "p:not(.appE1121)"
@@ -57,15 +78,14 @@ async def scrape_text_from_page(urls, delay=5.0):
             article_text = '\n'.join(paragraphs)
 
             # print(url, sections, title, time, article_text) #debugging
-            df.loc[len(df.index)] = [url, title, sections[0], sections[1], time, article_text]
+            df.loc[len(df.index)] = [url, h1, sections, time, article_text]
 
             await asyncio.sleep(delay)
 
             if i % 100 == 0 or i == len(urls) - 1:
                 df.to_csv(path_or_buf=sys.argv[2], mode='w')
                 print(f"Saved {len(df.index)} articles to file.")
-                df = pd.DataFrame(columns=['link', 'title', 'section1',
-                                    'section2', 'time', 'article text'])
+                df = pd.DataFrame(columns=['link', 'title', 'sections', 'time', 'article text'])
 
         await browser.close()
     
