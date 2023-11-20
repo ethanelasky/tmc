@@ -17,3 +17,8 @@ Articles:
 ## United Daily News (聯合報)
 Links: 
 Articles:
+
+# Notes
+## Playwright
+I used Chromium with the [uBlock Origin extension](https://github.com/gorhill/uBlock/releases) as my Playwright browser to avoid ad-related delays. You can click on the above link and look under **Assets** to get a chromium release. Then, just extract the source file to your working directory and it should work with my code.
+

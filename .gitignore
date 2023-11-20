@@ -2,3 +2,5 @@
 notebooks/.DS_Store scrapers/.DS_Store scrapers/ltn_scraper/.DS_Store 
 scrapers/ltn_scraper/spiders/.DS_Store scrapers/ltn_scraper/spiders/__pycache__/.DS_Store
 scrapers/ltn_article_scraper/*.json
+scrapers/ltn_article_scraper/ltn_2013_links.json
+scrapers/ltn_article_scraper/uBlock
