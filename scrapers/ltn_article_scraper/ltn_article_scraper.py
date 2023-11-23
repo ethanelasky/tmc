@@ -1,11 +1,11 @@
 """
-Scrapes text from articles on the China Times' online newspaper website. 
-See the docstring of scrape_text_from_page for more info. 
+Scrapes articles from Liberty Times News' online newspaper. See the
+docstring of scrape_text_from_page for more info. 
 
-Usage: python ct_article_scraper.py [path_to_urls] [output_file_name]
+Usage: python ltn_article_scraper.py [path_to_urls] [output_file_name]
 
-Ex: python ct_article_scraper.py ct_2013_links.json 
-                                    ct_2013_article_contents.csv
+Ex: python ltn_article_scraper.py ltn_2013_links.json 
+                                    ltn_2013_article_contents.csv
 """
 
 import asyncio
@@ -13,7 +13,7 @@ import pandas as pd
 from playwright.async_api import async_playwright
 import sys
 
-async def scrape_html(urls, delay=5.0):
+async def scrape_text_from_page(urls, delay=5.0):
     """ 
     Scrapes article contents from webpages given a list of URLs. The
     contents of each article consists of its link, title, section, subsection,
@@ -32,6 +32,10 @@ async def scrape_html(urls, delay=5.0):
         line arguments
     """
 
+    assert len(sys.argv) == 3
+
+    df = pd.DataFrame(columns=['link', 'title', 'sections', 'time', 'article text'])
+
     path_to_extension = "./uBlock"
     user_data_dir = "/tmp/test-user-data-dir"
 
@@ -40,18 +44,13 @@ async def scrape_html(urls, delay=5.0):
         user_data_dir,
         headless=False,
         args=[
-            "--headless=new",
             f"--disable-extensions-except={path_to_extension}",
             f"--load-extension={path_to_extension}",
         ],
         )
 
-        ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
-
-
         page = await browser.new_page()
         page.set_default_navigation_timeout(60000)
-        context = browser.new_context(user_agent=ua)
 
         for i in range(len(urls)):
             url = urls[i]
@@ -64,15 +63,29 @@ async def scrape_html(urls, delay=5.0):
                     continue
                 break
 
-            title = await page.locator('css=.article-title').inner_text()
-            contents = page.content()
+            sections = await page.locator('css=div.breadcrumbs.boxTitle.boxText > a').all_inner_texts()
 
-            with open(title + ".html", 'w') as f:
-                f.write(contents)
-                print("Wrote {title} to file.")
+            h1s = await page.locator('css=h1').all_inner_texts()
+            h1 = next(filter(None, h1s))
+
+            times = await page.locator('css=.time').all_inner_texts()
+            time = next(filter(None, times))
+
+
+            paragraphs = await page.locator("css=div.text.boxTitle.boxText > "
+                                      + "p:not(.appE1121)"
+                                      + ":not(.before_ir)").all_inner_texts()
+            article_text = '\n'.join(paragraphs)
+
+            # print(url, sections, title, time, article_text) #debugging
+            df.loc[len(df.index)] = [url, h1, sections, time, article_text]
 
             await asyncio.sleep(delay)
 
+            if i % 100 == 0 or i == len(urls) - 1:
+                df.to_csv(path_or_buf=sys.argv[2], mode='w')
+                print(f"Saved {len(df.index)} articles to file.")
+                df = pd.DataFrame(columns=['link', 'title', 'sections', 'time', 'article text'])
 
         await browser.close()
     
@@ -80,8 +93,6 @@ async def scrape_html(urls, delay=5.0):
 # The delay in seconds between requests
 request_delay = 3.0 
 
-with open(sys.argv[1]) as f:
-    urls = f.read().split('\n')
-    urls = list(filter(None, urls))
+urls = pd.read_json(sys.argv[1])['link'].values
 
-asyncio.run(scrape_html(urls, request_delay))
+asyncio.run(scrape_text_from_page(urls, request_delay))
