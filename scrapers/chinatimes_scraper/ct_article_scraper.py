@@ -1,6 +1,6 @@
 """
-Scrapes articles from the China Times' online newspaper. See the
-docstring of scrape_text_from_page for more info. 
+Scrapes text from articles on the China Times' online newspaper website. 
+See the docstring of scrape_text_from_page for more info. 
 
 Usage: python ct_article_scraper.py [path_to_urls] [output_file_name]
 
@@ -44,13 +44,18 @@ async def scrape_text_from_page(urls, delay=5.0):
         user_data_dir,
         headless=False,
         args=[
+            "--headless=new",
             f"--disable-extensions-except={path_to_extension}",
             f"--load-extension={path_to_extension}",
         ],
         )
 
+        ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+
+
         page = await browser.new_page()
         page.set_default_navigation_timeout(60000)
+        context = browser.new_context(user_agent=ua)
 
         for i in range(len(urls)):
             url = urls[i]
