@@ -13,7 +13,7 @@ import pandas as pd
 from playwright.async_api import async_playwright
 import sys
 
-async def scrape_text_from_page(urls, delay=5.0):
+async def scrape_html(urls, delay=5.0):
     """ 
     Scrapes article contents from webpages given a list of URLs. The
     contents of each article consists of its link, title, section, subsection,
@@ -68,26 +68,15 @@ async def scrape_text_from_page(urls, delay=5.0):
                     continue
                 break
 
-            source = await page.locator('div.source').all_inner_texts()
-
             title = await page.locator('css=.article-title').inner_text()
+            contents = page.content()
 
-            times = await page.locator("css=time").get_attribute("datetime")
-            time = next(filter(None, times))
-
-
-            paragraphs = await page.locator("css=div.article-body > p").all_inner_texts()
-            article_text = '\n'.join(paragraphs)
-
-            # print(url, sections, title, time, article_text) #debugging
-            df.loc[len(df.index)] = [url, title, source, time, article_text]
+            with open(title + ".html", 'w') as f:
+                f.write(contents)
+                print("Wrote {title} to file.")
 
             await asyncio.sleep(delay)
 
-            if i % 100 == 0 or i == len(urls) - 1:
-                df.to_csv(path_or_buf=sys.argv[2], mode='w')
-                print(f"Saved {len(df.index)} articles to file.")
-                df = pd.DataFrame(columns=['link', 'title', 'sections', 'time', 'article text'])
 
         await browser.close()
     
@@ -99,4 +88,4 @@ with open(sys.argv[1]) as f:
     urls = f.read().split('\n')
     urls = list(filter(None, urls))
 
-asyncio.run(scrape_text_from_page(urls, request_delay))
+asyncio.run(scrape_html(urls, request_delay))
