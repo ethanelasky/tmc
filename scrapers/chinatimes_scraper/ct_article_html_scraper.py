@@ -60,7 +60,7 @@ async def scrape_html(index_url_pairs, delay=5.0):
 
             title = await page.locator('css=.article-title').inner_text()
             contents = await page.content()
-            with open(str(index) + ".html", 'w') as f:
+            with open("/output/" + str(index) + ".html", 'w') as f:
                 f.write(contents)
                 print(f"Wrote {title} to file.")
 
