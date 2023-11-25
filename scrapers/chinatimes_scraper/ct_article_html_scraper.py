@@ -27,16 +27,16 @@ async def scrape_html(index_url_pairs, delay=5.0):
 
     path_to_extension = "./uBlock"
     user_data_dir = "/tmp/test-user-data-dir"
-    #ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+    ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
         
 
     async with async_playwright() as p:
         browser = await p.chromium.launch_persistent_context(
         user_data_dir,
         headless=False,
-        #user_agent=ua,
+        user_agent=ua,
         args=[
-            #"--headless=new",
+            "--headless=new",
             f"--disable-extensions-except={path_to_extension}",
             f"--load-extension={path_to_extension}",
         ],
@@ -60,7 +60,7 @@ async def scrape_html(index_url_pairs, delay=5.0):
 
             title = await page.locator('css=.article-title').inner_text()
             contents = await page.content()
-            with open(index + ".html", 'w') as f:
+            with open(str(index) + ".html", 'w') as f:
                 f.write(contents)
                 print(f"Wrote {title} to file.")
 
