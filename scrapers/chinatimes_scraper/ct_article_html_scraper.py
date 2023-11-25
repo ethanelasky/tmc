@@ -54,7 +54,7 @@ async def scrape_html(index_url_pairs, delay=5.0):
                 try:
                     await page.goto(url)      
                 except:
-                    await asyncio.sleep(delay)
+                    await asyncio.sleep(delay * 3)
                     continue
                 break
 
