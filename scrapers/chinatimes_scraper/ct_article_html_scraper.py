@@ -13,7 +13,7 @@ import pandas as pd
 from playwright.async_api import async_playwright
 import sys
 
-async def scrape_html(urls, delay=5.0):
+async def scrape_html(index_url_pairs, delay=5.0):
     """ 
     Scrapes article HTML from webpages given a list of URLs.
     
@@ -45,8 +45,10 @@ async def scrape_html(urls, delay=5.0):
         page = await browser.new_page()
         page.set_default_navigation_timeout(60000)
 
-        for i in range(len(urls)):
-            url = urls[i]
+        for i in range(len(index_url_pairs)):
+            pair = index_url_pairs[i]
+            index = pair[0]
+            url = pair[1]
             print(url)
             while True:
                 try:
@@ -58,7 +60,7 @@ async def scrape_html(urls, delay=5.0):
 
             title = await page.locator('css=.article-title').inner_text()
             contents = await page.content()
-            with open(title + ".html", 'w') as f:
+            with open(index + ".html", 'w') as f:
                 f.write(contents)
                 print(f"Wrote {title} to file.")
 
@@ -70,10 +72,13 @@ async def scrape_html(urls, delay=5.0):
 # The delay in seconds between requests
 request_delay = 3.0 
 
-urls = pd.read_csv(sys.argv[1], index_col=0)['link'].values
+df = pd.read_csv(sys.argv[1], index_col=0)
+indices = df.index
+links = df['link'].values
+index_url_pairs = list(zip(indices, links))
 
 # with open(sys.argv[1]) as f:
 #     urls = f.read().split('\n')
 #     urls = list(filter(None, urls))
 
-asyncio.run(scrape_html(urls, request_delay))
+asyncio.run(scrape_html(index_url_pairs, request_delay))
