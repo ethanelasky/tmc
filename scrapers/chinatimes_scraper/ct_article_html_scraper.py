@@ -58,11 +58,10 @@ async def scrape_html(index_url_pairs, delay=5.0):
                     continue
                 break
 
-            title = await page.locator('css=.article-title').inner_text()
             contents = await page.content()
-            with open("/output/" + str(index) + ".html", 'w', encoding="utf-8") as f:
+            with open(str(index) + ".html", 'w', encoding="utf-8") as f:
                 f.write(contents)
-                print(f"Wrote {title} to file.")
+                print(f"Wrote {index} to file.")
 
             await asyncio.sleep(delay)
 
@@ -73,12 +72,10 @@ async def scrape_html(index_url_pairs, delay=5.0):
 request_delay = 3.0 
 
 df = pd.read_csv(sys.argv[1], index_col=0)
+if len(sys.argv) == 3:
+    df = df.iloc[int(sys.argv[2]):, :]
 indices = df.index
 links = df['link'].values
 index_url_pairs = list(zip(indices, links))
-
-# with open(sys.argv[1]) as f:
-#     urls = f.read().split('\n')
-#     urls = list(filter(None, urls))
 
 asyncio.run(scrape_html(index_url_pairs, request_delay))
