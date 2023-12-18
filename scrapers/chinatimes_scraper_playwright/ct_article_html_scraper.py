@@ -90,15 +90,23 @@ async def scrape_html(index_url_pairs, mu=5):
         await context.close()
     
 
-# The delay in seconds between requests
+# The mean delay in seconds between requests
 mu = 9.0 
 
-df = pd.read_csv(sys.argv[1], index_col=0)
+if sys.argv[1][:-3] == ".csv":
+    df = pd.read_csv(sys.argv[1], index_col=0)
+    if len(sys.argv) == 3:
+        df = df.loc[int(sys.argv[2]):, :]
+    indices = df.index
+    links = df['link'].values
+    index_url_pairs = list(zip(indices, links))
+else:
+    df = pd.read_parquet(sys.argv[1])
+    if len(sys.argv) == 3:
+        df = df.loc[int(sys.argv[2]):, :]
+    indices = df.index
+    links = df['link'].values
+    index_url_pairs = list(zip(indices, links))
 print(df)
-if len(sys.argv) == 3:
-    df = df.loc[int(sys.argv[2]):, :]
-indices = df.index
-links = df['link'].values
-index_url_pairs = list(zip(indices, links))
 
 asyncio.run(scrape_html(index_url_pairs, mu))
