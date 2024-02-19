@@ -1,11 +1,11 @@
 """
-Scrapes text from articles on the China Times' online newspaper website. 
+Scrapes text from articles on the United Daily's online newspaper website. 
 See the docstring of scrape_text_from_page for more info. 
 
-Usage: python ct_article_scraper.py [path_to_urls] [output_file_name]
+Usage: python udn_playwright.py [path_to_urls] [optional: index to start at]
 
-Ex: python ct_article_scraper.py ct_2013_links.json 
-                                    ct_2013_article_contents.csv
+Ex: python udn_playwright.py ct_2020_links_1.json 89756
+                                    
 """
 
 import asyncio
@@ -14,6 +14,8 @@ from playwright_stealth import stealth_async
 from playwright.async_api import async_playwright, BrowserContext
 import sys
 from scipy import stats
+
+headless = False
 
 async def scrape_html(index_url_pairs):
     """ 
@@ -27,7 +29,7 @@ async def scrape_html(index_url_pairs):
     """
 
     path_to_extension = "./uBlock"
-    user_data_dir = "/tmp/test-user-data-dir"
+    user_data_dir = "/tmp/udn-user-data-dir"
     ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
 
     async with async_playwright() as p:
@@ -95,11 +97,13 @@ async def scrape_html(index_url_pairs):
                     f.write(contents)
                     print(f"Wrote {index} to file.")
 
-            sleep_duration = stats.beta.rvs(1, 5) + 9
+            sleep_duration = stats.beta.rvs(1, 5) + 7
             print("Between pages. Wait time: ", sleep_duration)
             await asyncio.sleep(sleep_duration)
 
         await context.close()
+    
+# The mean delay in seconds between requests
 
 if sys.argv[1][:-3] == ".csv":
     df = pd.read_csv(sys.argv[1], index_col=0)
