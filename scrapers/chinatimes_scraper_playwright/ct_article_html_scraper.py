@@ -9,11 +9,15 @@ Ex: python ct_article_scraper.py ct_2013_links.json
 """
 
 import asyncio
+import glob
+import os
 import pandas as pd
 from playwright_stealth import stealth_async
-from playwright.async_api import async_playwright, BrowserContext
+from playwright.async_api import async_playwright
+import re
 import sys
 from scipy import stats
+import zipfile
 
 async def scrape_html(index_url_pairs):
     """ 
@@ -38,7 +42,6 @@ async def scrape_html(index_url_pairs):
             headless=False,
             user_agent=ua,
             args=[
-                "--headless=new",
                 f"--disable-extensions-except={path_to_extension}",
                 f"--load-extension={path_to_extension}",
             ],
@@ -100,6 +103,21 @@ async def scrape_html(index_url_pairs):
             await asyncio.sleep(sleep_duration)
 
         await context.close()
+
+        if i == len(index_url_pairs):
+            html_files = glob.glob('*.html')
+            zip_file_name = re.search("[^\.]+", sys.argv[1])[0] + ".zip"
+            
+            with zipfile.ZipFile(zip_file_name, 'w') as zipf:
+                for file in html_files:
+                    zipf.write(file)
+
+            for file in html_files:
+                os.remove(file)
+            
+            print("Scrape complete. All HTML files have been zipped into ", zip_file_name, " and deleted.")
+
+        
 
 if sys.argv[1][:-3] == ".csv":
     df = pd.read_csv(sys.argv[1], index_col=0)
