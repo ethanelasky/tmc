@@ -1,6 +1,6 @@
 This readme elaborates on my thesis paper's Appendix A with regards to data scraping and processing.
 
-##Data collection and processing
+## Data collection and processing
 
 The pipeline follows three general steps, regardless of newspaper. First, I collected links to all articles from within the given timeframe (Feb 2021-Jan 2024, three complete years). Then, I collected page HTMLs, and then scraped their contents.
 
@@ -37,22 +37,18 @@ Rate limiting happens when a computer sends too many requests within a given spa
 
 
 ### The China Times
-- Links: I scraped the website's sitemaps with Playwright.
-For articles pre-October 2022, I scraped the AMP sitemap, available at \url{https://chinatimes.com/sitemaps/sitemap_article_all_index_amp_0.xml}. For articles post-October 2022, I scraped the regular sitemap, available at \url{https://www.chinatimes.com/sitemaps/sitemap_article_all_index_0.xml}. I scraped the AMP sitemap when I could because of its less memory-intensive format.
-- HTMLs: Playwright and Wayback Machine. The China Times website had the strictest rate limit by far, at 10 seconds/request, so I used the Wayback Machine to get a plurality of the articles first and then used Playwright for the rest.
+- Links: I scraped the website's sitemaps with Playwright. I scraped the AMP sitemap, available at [https://chinatimes.com/sitemaps/sitemap_article_all_index_amp_0.xml](https://chinatimes.com/sitemaps/sitemap_article_all_index_amp_0.xml). I scraped the AMP sitemap because of its less storage-intensive and more consistent format.
+- HTMLs: Playwright and Wayback Machine. The China Times website had the strictest rate limit by far, at 9 seconds/request, so I used the Wayback Machine to get a plurality of the articles first and then used Playwright for the rest.
 - Article contents: BeautifulSoup. 
 
 ### The United Daily
-- Links: Scraped the website's sitemap (available at \url{https://udn.com/sitemapxml/news/mapindex.xml}) with Playwright. 
+- Links: Scraped the website's sitemap (available at [https://udn.com/sitemapxml/news/mapindex.xml](https://udn.com/sitemapxml/news/mapindex.xml)) with Playwright. 
 Articles: Playwright (headless) or Wayback Machine, depending on year. As of the time of writing, the United Daily 404’s links to articles older than one year (e.g. before Feburary 2023). For this newspaper, I have access to all non-erroring news articles on the United Daily website (which currently go back to 2023) as well as Wayback Machine HTMLs for all available archived articles.
 - HTMLs: Playwright
 - Article contents: BeautifulSoup
 
-Very rarely (~1 in 20,000 articles), my computer would experience 
-https://udn.com/news/story/7328/7448580
-
 ### Edge cases
-The print media outlets I followed sometimes published multimedia articles. If an article was not accompanied by text (above and beyond a caption), and solely consisted of a title and a photo or video, I removed it from the dataset. 404s were also common, and I removed 404s from the dataset as well.
+The print media outlets I followed sometimes published multimedia articles. If an article was not accompanied by text (above and beyond a caption, e.g. [this](https://udn.com/news/story/7328/7448580)), and solely consisted of a title and a photo or video, I removed it from the dataset. 404s were also common, and I removed 404s from the dataset as well.
 
 Occasionally, I would encounter 502 or 403 errors. These were signs that I had just hit a rate-limit, so I would halt the crawl and manually recrawl the erroring articles later. Sometimes, however, I would encounter "random" 502s in the middle of a successful crawl, and recrawling would produce the same error. I removed these errant 502s from the dataset as well.
 
