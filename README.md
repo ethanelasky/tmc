@@ -4,7 +4,7 @@ _Ethan Elasky_
 
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ethanelasky/ustmc/HEAD)
 
-This is my thesis for my Data Science honors course. It aims to compare Taiwanese and American media coverage of Chinese activities in the Taiwan Strait using natural language processing techniques. This is informative in explaining how the Taiwanese and American publics differ in their attitudes about the threat posed to the island by the mainland's Communist regime. For more detailed information, see my [Pre-Analysis Plan](notebooks/pre-analysis-plan.md). [Lucy Li](lucy3.github.io)'s advising is transformative in this making of this project.
+This is my thesis for my Data Science honors course. It aims to compare Taiwanese media coverage of America and China using natural language processing techniques. This is informative in understanding polarization and media bias in Taiwan, which is largly split along differing attitudes about the threat posed to the island by the mainland's Communist regime. For more detailed information, see my [Pre-Analysis Plan](notebooks/pre-analysis-plan.md). [Lucy Li](lucy3.github.io) is my advisor.
 
 ## Directory Structure
 
@@ -15,6 +15,4 @@ This repo contains a few subfolders which contain the elements of this project.
 | `data`  | data from the original analysis in CSV, TSV, and pip-separated format  |
 | `images`  | image files used in the Jupyter Notebooks  |
 | `notebooks`  | Jupyter Notebook files  |
-| `output`  | output data (same as original, for demo purposes) in CSV and TSV format  |
-| `scrapers`  |  website spiders  |
-| `subassignments`  | markdown files with submissions for course assignments  |
+| `scrapers`  |  website spiders (Scrapy) and scrapers (Playwright) |
