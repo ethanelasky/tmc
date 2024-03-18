@@ -27,7 +27,7 @@ async def scrape_urls_from_sitemap(root_links, delay=5.0):
 
             with open('udn_article_links.txt', 'a') as file:
                 for leaf in leaf_links:
-                    file.write(leaf + '\n')
+                    file.write(re.search("(?:T)(\d\d\d\d\d\d)", sitemap_url).group(0) + ", " + leaf + '\n')
 
             # Wait for the specified delay before making the next request
             await asyncio.sleep(delay)
