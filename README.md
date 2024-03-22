@@ -1,4 +1,4 @@
-# Data H195 Honors Thesis - US-Taiwan Media Comparison
+# Data H195 Honors Thesis - Taiwan Media Comparison
 
 _Ethan Elasky_
 
@@ -12,7 +12,7 @@ This repo contains a few subfolders which contain the elements of this project.
 
 | Folder | Description |
 |-----|-----|
-| `data`  | data from the original analysis in CSV, TSV, and pip-separated format  |
+| `data`  | scraped article links in parquet and CSV format |
 | `images`  | image files used in the Jupyter Notebooks  |
-| `notebooks`  | Jupyter Notebook files  |
-| `scrapers`  |  website spiders (Scrapy) and scrapers (Playwright) |
+| `analysis`  | Jupyter Notebooks containing data analysis |
+| `scrapers`  |  website spiders (Scrapy), scrapers (Playwright), and preprocessing scripts |
